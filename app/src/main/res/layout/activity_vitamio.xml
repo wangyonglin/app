@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dots="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center|center_horizontal|center_vertical"
+    android:background="@color/colorWhite"
+    tools:context="com.khbd.app.VitamioActivity">
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/load"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:visibility="visible"
+        app:indicatorColor="@color/colorAccent"
+        app:indicatorName="BallPulseIndicator"
+        />
+    <FrameLayout
+        android:id="@+id/fl_controller"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <io.vov.vitamio.widget.CenterLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorBlack">
+
+            <io.vov.vitamio.widget.VideoView
+                android:id="@+id/buffer"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+        </io.vov.vitamio.widget.CenterLayout>
+
+    </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/film_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/wangyonglin_border_bottom_black"
+                android:padding="5dp"
+                android:text=" "
+                android:textColor="@color/colorWhite"
+                android:textSize="21dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/film_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/ADSS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+
+        <ImageView
+            android:id="@+id/ADSIMAGE"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="@string/gdtslogan"
+            android:scaleType="fitXY"
+            android:src="@drawable/gdt_splash_logo" />
+        <TextView
+            android:id="@+id/ADSBOX"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/ADSIMAGE"
+
+           android:background="@color/colorOverlay"
+            android:gravity="center"
+            android:text="@string/ads"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+
+

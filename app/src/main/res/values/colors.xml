@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorWechat">#2F9833</color>
+    <color name="colorWechat1">#439057</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBack">#f0f0f0</color>
+    <color name="colorOverlay">#66000000</color>
+    <color name="black_overlay">#66000000</color>
+</resources>
