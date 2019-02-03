@@ -14,7 +14,7 @@ import com.heylyn.network.download.ProgressCallback;
 
 import java.io.File;
 
-import io.vov.vitamio.utils.Log;
+
 import vendor.android.log.Logger;
 
 

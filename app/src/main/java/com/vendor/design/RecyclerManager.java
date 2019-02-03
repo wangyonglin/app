@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.khbd.app.VitamioActivity;
 import com.khbd.movie.RecyclerAdapter;
 import com.vendor.event.OnMovieItemClickListener;
 
@@ -25,15 +24,7 @@ public class RecyclerManager {
             @Override
             public void onItemClick(Atom atom) {
                 Toast.makeText(context,atom.getUUID().toString(), Toast.LENGTH_SHORT).show();
-                RouteUtil.JumpWhenCanClick(context, VitamioActivity.class, new RouteUtil.BuilderCallback() {
-                    @Override
-                    public void put(Bundle bundle) {
-                        bundle.putString("UUID",atom.getUUID());
-                        bundle.putString("TITLE",atom.getTitle());
-                        bundle.putString("VIDEO",atom.getVideo());
-                        bundle.putString("POSTER",atom.getPoster());
-                    }
-                });
+
             }
         });
         recyclerView.setAdapter(adapter);//设置适配器

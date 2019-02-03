@@ -4,13 +4,13 @@ import android.app.Application;
 
 import com.baidu.mobstat.StatService;
 
-import io.vov.vitamio.Vitamio;
+
 
 public class Bootloader extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Vitamio.isInitialized(getApplicationContext());
+
         //百度统计Start
         StatService.start(this);
         StatService.autoTrace(this);

@@ -35,13 +35,6 @@
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VitamioActivity"
-            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
-            android:label="@string/title_activity_vitamio"
-            android:recreateOnConfigChanges="mcc"
-            android:screenOrientation="portrait"
-            android:theme="@style/VitamioTheme" />
-        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_search"
             android:configChanges="orientation|keyboard"
