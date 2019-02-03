@@ -13,10 +13,10 @@ public class ToolbarFactory {
         if(toolbar==null){
             throw new RuntimeException("Stub!");
         }
-        toolbar.setTitle("葵花宝典 电影APP");
+        toolbar.setTitle("PORN VIDEO");
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setSubtitle("官网:EEOB.COM 微信:EX7132");
-        toolbar.setSubtitleTextColor(Color.WHITE);
+       // toolbar.setSubtitle("官网:EEOB.COM 微信:EX7132");
+       // toolbar.setSubtitleTextColor(Color.WHITE);
 
         //设置menu
         toolbar.inflateMenu(R.menu.menu_item);
