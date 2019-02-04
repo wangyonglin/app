@@ -2,35 +2,39 @@ package com.khbd.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.data.RecyclerData;
+import com.factory.LoadingFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.interfaces.AdditionalInterface;
 
+import com.kernel.Loading;
 import com.khbd.app.fragment.CategoriesFragment;
 import com.khbd.app.fragment.SearchFragment;
 import com.util.APIURL;
 import com.util.JSONUtil;
-import com.util.Logger;
 import com.util.ToastUtil;
 import com.vendor.design.Atom;
 
-import com.view.FragmentFactory;
-import com.view.NavigationFactory;
+import com.factory.FragmentFactory;
+import com.factory.NavigationFactory;
 import com.factory.RecyclerFactory;
-import com.view.ToolbarFactory;
+import com.factory.ToolbarFactory;
 import com.wangyonglin.app.network.Video;
+import com.zyao89.view.zloading.ZLoadingDialog;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +42,16 @@ import javakit.jackson.JacksonUtil;
 import javakit.network.HttpClientResponse;
 import javakit.network.HttpClientResponse.ResultCallback;
 
+import static com.zyao89.view.zloading.Z_TYPE.CIRCLE;
+import static com.zyao89.view.zloading.Z_TYPE.DOUBLE_CIRCLE;
+
 public class MainActivity extends FragmentActivity implements AdditionalInterface,SearchFragment.OnFragmentInteractionListener ,CategoriesFragment.OnFragmentInteractionListener,Runnable{
     private RelativeLayout your_original_layout;
     private BottomNavigationView activity_main_navigation;
     private Toolbar activity_main_toolbar;
     private String url;
     private RecyclerView activity_main_recyclerview;
-
+    private Loading loading;
 
 
    @SuppressLint("NewApi")  @Override
@@ -54,7 +61,14 @@ public class MainActivity extends FragmentActivity implements AdditionalInterfac
        setContentView(your_original_layout);
        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
        StrictMode.setThreadPolicy(policy);
-
+       loading = LoadingFactory.OnCreate(MainActivity.this);
+       loading.show();
+       new Handler().postDelayed(new Runnable(){
+           public void run() {
+               //execute the task
+              loading.dismiss();
+           }
+       }, 5000);
         this.initViews();
         this.initFactory();
         this.initData();
@@ -88,8 +102,9 @@ public class MainActivity extends FragmentActivity implements AdditionalInterfac
             }
         });
         NavigationFactory.OnCreate(MainActivity.this, activity_main_navigation, new NavigationFactory.ResultCallback() {
+
             @Override
-            public void onSearch() {
+            public void onDiscover() {
                 ToastUtil.showToast(MainActivity.this,"search");
                 FragmentFactory.OnReplace(MainActivity.this,R.id.activity_main_fragment,SearchFragment.newInstance("D","DD"));
                 updateRecycler(APIURL.ALL(0, 12));
@@ -100,6 +115,13 @@ public class MainActivity extends FragmentActivity implements AdditionalInterfac
                 ToastUtil.showToast(MainActivity.this,"categories");
                 FragmentFactory.OnReplace(MainActivity.this,R.id.activity_main_fragment,CategoriesFragment.newInstance("D","DD"));
                 updateRecycler(APIURL.CATEGORIES("剧情",0, 12));
+            }
+
+            @Override
+            public void onPornstars() {
+                ToastUtil.showToast(MainActivity.this,"search");
+                FragmentFactory.OnReplace(MainActivity.this,R.id.activity_main_fragment,SearchFragment.newInstance("D","DD"));
+                updateRecycler(APIURL.ALL(0, 12));
             }
 
             @Override

@@ -121,7 +121,7 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
         TabLayoutFactory.OnCreate(getActivity(), fragment_main_categories, new TabLayoutFactory.ResultCallback() {
             @Override
             public void OnCreateView(Context context, TabLayout view) {
-                view.addTab(view.newTab().setText("剧情"));
+                view.addTab(view.newTab().setText("Japanese"));
                 view.addTab(view.newTab().setText("喜剧"));
                 view.addTab(view.newTab().setText("动作"));
                 view.addTab(view.newTab().setText("爱情"));

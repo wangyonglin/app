@@ -5,6 +5,8 @@
     <color name="colorWechat1">#439057</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorPurple">#7F1F76</color>
+    <color name="colorMain">#FF4081</color>
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
     <color name="colorBack">#f0f0f0</color>

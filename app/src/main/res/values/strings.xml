@@ -7,11 +7,13 @@
     <string name="google_admob_app_id">ca-app-pub-3700703708149769~9980982362</string>
     <string name="google_admob_barner_id">ca-app-pub-3700703708149769/5219733981</string>
 
-    <string name="app_name">葵花宝典</string>
-    <string name="title_menu_search">搜索</string>
-    <string name="title_menu_movie">电影</string>
+    <string name="app_name">PornHub</string>
+    <string name="title_menu_discover">Discover</string>
+    <string name="title_menu_categories">Categories</string>
+    <string name="title_menu_pornstars">Pornstars</string>
+    <string name="title_menu_me">Me</string>
+
     <string name="title_menu_teleplay">电视剧</string>
-    <string name="title_menu_me">我的</string>
     <string name="title_dashboard">分类</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_search">搜索</string>
@@ -19,7 +21,7 @@
     <string name="title_activity_detail">我们</string>
     <string name="title_search_hint">请输入您要搜索的电影</string>
 
-    <string name="toolbar_item_share">分享</string>
+    <string name="toolbar_item_share">Share</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Home blank fragment</string>
     <!-- TODO: 用于App升级使用-->

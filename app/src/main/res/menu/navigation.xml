@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/ico_menu_search"
-        android:title="@string/title_menu_search" />
-
+        android:id="@+id/navigation_discover"
+        android:icon="@drawable/ico_menu_discover"
+        android:title="@string/title_menu_discover" />
     <item
-        android:id="@+id/navigation_movie"
-        android:icon="@drawable/ico_menu_moive_d"
-        android:title="@string/title_menu_movie" />
-
-
-
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/ico_menu_categories"
+        android:title="@string/title_menu_categories" />
+    <item
+        android:id="@+id/navigation_pornstars"
+        android:icon="@drawable/ico_menu_pornstars"
+        android:title="@string/title_menu_pornstars" />
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ico_menu_me"

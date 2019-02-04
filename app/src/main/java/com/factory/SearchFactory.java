@@ -1,12 +1,7 @@
-package com.view;
+package com.factory;
 
 import android.content.Context;
 import android.support.v7.widget.SearchView;
-import android.widget.RelativeLayout;
-
-import com.vendor.design.MetricsBuilder;
-
-import vendor.android.DensityUtil;
 
 public class SearchFactory {
 

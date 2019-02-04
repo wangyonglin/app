@@ -1,4 +1,4 @@
-package com.view;
+package com.factory;
 
 import android.content.Context;
 

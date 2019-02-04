@@ -3,7 +3,6 @@ package com.khbd.app.fragment;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,8 +14,7 @@ import android.view.ViewGroup;
 import com.interfaces.AdditionalInterface;
 import com.khbd.app.R;
 import com.util.Logger;
-import com.util.ToastUtil;
-import com.view.SearchFactory;
+import com.factory.SearchFactory;
 
 /**
  * A simple {@link Fragment} subclass.

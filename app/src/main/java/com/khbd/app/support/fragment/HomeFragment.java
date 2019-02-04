@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.event.SearchEvent;
 import com.interfaces.AdditionalInterface;
 import com.khbd.app.R;
 
 import com.util.ToastUtil;
 
-import com.view.SearchFactory;
+import com.factory.SearchFactory;
 
 public class HomeFragment extends Fragment implements View.OnClickListener,AdditionalInterface {
     private static final String TAG = "HomeFragment";
