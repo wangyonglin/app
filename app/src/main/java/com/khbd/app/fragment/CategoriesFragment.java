@@ -5,17 +5,27 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.data.RecyclerData;
 import com.event.TabLayoutEvent;
+import com.factory.RecyclerFactory;
 import com.factory.TabLayoutFactory;
 import com.interfaces.AdditionalInterface;
 import com.khbd.app.R;
+import com.khbd.data.httpClintHelper;
+import com.util.APIURL;
 import com.util.ToastUtil;
+import com.vendor.design.Atom;
+
+import java.util.List;
 
 
 /**
@@ -38,7 +48,7 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
     private TabLayout fragment_main_categories;
     private OnFragmentInteractionListener mListener;
     private View view;
-
+    private RecyclerView fragment_categories_recyclerview;
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -78,6 +88,7 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
         view= inflater.inflate(R.layout.fragment_categories, container, false);
         this.initViews();
         this.initFactory();
+        this.initData();
         return view;
     }
 
@@ -114,10 +125,17 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
     @Override
     public void initViews() {
         fragment_main_categories=view.findViewById(R.id.fragment_main_categories);
+        fragment_categories_recyclerview=view.findViewById(R.id.fragment_categories_recyclerview);
     }
 
     @Override
     public void initFactory() {
+        RecyclerFactory.OnCreate(getActivity(), fragment_categories_recyclerview, new RecyclerFactory.ResultCallback() {
+            @Override
+            public void OnCreateView(Context context, RecyclerView recyclerView) {
+
+            }
+        });
         TabLayoutFactory.OnCreate(getActivity(), fragment_main_categories, new TabLayoutFactory.ResultCallback() {
             @Override
             public void OnCreateView(Context context, TabLayout view) {
@@ -142,6 +160,12 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
                 view.addTab(view.newTab().setText("武侠"));
                 view.addTab(view.newTab().setText("情色"));
             }
+
+            @Override
+            public void onTabSelected(String  text) {
+                ToastUtil.showToast(getActivity(),text);
+                updateRecycler(APIURL.CATEGORIES(text,0,12));
+            }
         });
     }
 
@@ -150,6 +174,7 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
         TabLayoutEvent.OnTabSelectedListener(getActivity(), fragment_main_categories, new TabLayoutEvent.ResultCallback() {
             @Override
             public void onTabSelected(String text) {
+
                 mListener.onCategoriesInteraction(text);
             }
         });
@@ -183,5 +208,25 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
             throw new IllegalArgumentException("must implements FragmentInteraction");
         }
 
+    }
+
+    @Override
+    public void initData() {
+        this.updateRecycler(APIURL.CATEGORIES("喜剧",0,12));
+    }
+
+    private void updateRecycler(@NonNull String url){
+        httpClintHelper.ResultAtoms(url, new javakit.result.ResultCallback<List<Atom>>() {
+            @Override
+            public void resove(List<Atom> datas) {
+
+                RecyclerData.load(getActivity(), fragment_categories_recyclerview, datas, new RecyclerData.ResultCallback<Atom>() {
+                    @Override
+                    public void onItemClick(Atom atom) {
+                        ToastUtil.showToast(getActivity(), atom.getTitle());
+                    }
+                });
+            }
+        });
     }
 }

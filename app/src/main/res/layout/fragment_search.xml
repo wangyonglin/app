@@ -6,20 +6,65 @@
     android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context=".fragment.SearchFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.SearchView
-        android:id="@+id/fragment_main_search"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:background="@color/colorWhite"
-        android:layout_below="@+id/activity_main_toolbar"
-        android:queryHint="@string/title_search_hint"
-        android:textColor="#ABABAB"
-        android:textColorHint="#ABABAB">
-    </android.support.v7.widget.SearchView>
+        android:focusable="true"
+        android:id="@+id/RelativeLayoutMain"
+        android:background="@color/colorMain">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/fragment_search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorMain" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/fragment_search_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorMain"
+        android:textColor="@color/colorWhite"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="当积雪从山巅上滚落而下，当阳光照耀大地的每一个角落，当鸟儿在枝头敞开歌喉，春天来了，迎春节也来了。 "
+        android:textSize="24dp"
+        android:layout_below="@id/RelativeLayoutMain"/>
+    <!--TODO: -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_search_text"
+        android:layout_marginBottom="60dp"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBack"
+            android:id="@+id/fragment_search_recyclerview"
+
+            />
+    </ScrollView>
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--
+  <android.support.v7.widget.SearchView
+      android:id="@+id/fragment_main_search"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_centerVertical="true"
+      android:layout_alignParentLeft="true"
+      android:background="@color/colorWhite"
+      android:layout_below="@+id/activity_main_toolbar"
+      android:queryHint="@string/title_search_hint"
+      android:textColor="#ABABAB"
+      android:textColorHint="#ABABAB">
+  </android.support.v7.widget.SearchView>
+  -->
 </RelativeLayout>

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,15 +18,13 @@ import com.khbd.app.R;
 import com.wangyonglin.app.domain.ItemClass;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import vendor.android.framework.FrameworkUtil;
 import vendor.date.TimeUtil;
 import vendor.http.bitmap.BitmapCallBack;
 import vendor.http.bitmap.BitmapUtil;
-import vendor.wangyonglin.plugin.widget.PictureView;
+import com.khbd.app.view.PictureView;
 
 public class ItemClassAdapter extends ArrayAdapter{
 

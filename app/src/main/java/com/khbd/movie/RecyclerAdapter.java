@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.khbd.app.R;
+import com.khbd.data.BitmapTask;
 import com.vendor.design.Atom;
 import com.vendor.event.OnMovieItemClickListener;
 
@@ -56,28 +57,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> implements
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         //将数据设置到item上
          final Atom atom = data.get(position);
-
-        HttpClientResponse.InputStream(atom.getPoster(), new HttpClientResponse.ResultCallback<InputStream>() {
-            @Override
-            public void success(InputStream res) throws IOException {
-                Bitmap bitmap = BitmapFactory.decodeStream(res);
-                ViewGroup.LayoutParams imageLayoutParams = viewHolder.moviePoster.getLayoutParams();
-                Resources resources = mContext.getResources();
-                DisplayMetrics dm = resources.getDisplayMetrics();
-                int width = (dm.widthPixels- DensityUtil.dip2px(12,mContext))/3;
-                imageLayoutParams.width = width;//获取实际展示的图片宽度
-                imageLayoutParams.height = bitmap.getHeight();//获取最终图片高度
-                viewHolder.moviePoster.setLayoutParams(imageLayoutParams);
-                viewHolder.moviePoster.setImageBitmap(bitmap);
-                viewHolder.movieName.setText(atom.getTitle());
-            }
-
-            @Override
-            public void failure(Exception e) {
-                e.printStackTrace();
-            }
-        });
-
+        new BitmapTask().execute(viewHolder.moviePoster,atom.getPoster());
+        viewHolder.movieName.setText(atom.getTitle());
         viewHolder.itemView.setTag(atom);
     }
 

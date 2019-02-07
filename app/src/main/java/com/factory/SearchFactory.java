@@ -21,7 +21,7 @@ public class SearchFactory {
             }
         });
         */
-        searchView.setQueryHint("请输入您要搜索的电影");
+        searchView.setQueryHint("Search Porn ...");
         // searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
         searchView.clearFocus();

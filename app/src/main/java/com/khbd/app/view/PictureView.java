@@ -1,4 +1,4 @@
-package vendor.wangyonglin.plugin.widget;
+package com.khbd.app.view;
 
 
 import android.content.Context;

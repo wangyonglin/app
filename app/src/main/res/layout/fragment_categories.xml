@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context="com.khbd.app.support.fragment.HomeFragment">
+    tools:context=".fragment.CategoriesFragment">
     <!-- TODO: Update blank fragment layout -->
     <android.support.design.widget.TabLayout
         android:id="@+id/fragment_main_categories"
@@ -14,12 +14,29 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:background="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabIndicatorColor="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        app:tabTextColor="@color/colorWhite"
+        android:background="@color/colorMain"
+        app:tabRippleColor="@color/colorWhite"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorWhite"
         app:tabIndicatorHeight="2dp"
         app:tabMaxWidth="0dp"
         app:tabMode="scrollable"
         app:tabGravity="fill"
         />
+
+
+    <!--TODO: -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_main_categories"
+        android:layout_marginBottom="60dp">
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBack"
+        android:id="@+id/fragment_categories_recyclerview"/>
+    </ScrollView>
 </RelativeLayout>

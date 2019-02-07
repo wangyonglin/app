@@ -1,5 +1,6 @@
 package com.khbd.data;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -8,9 +9,11 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import com.data.RecyclerData;
+import com.factory.LoadingFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kernel.Loading;
 import com.khbd.app.MainActivity;
 import com.util.JSONUtil;
 import com.util.ToastUtil;
@@ -28,7 +31,7 @@ import javakit.network.HttpClientResponse;
 import javakit.result.ResultCallback;
 
 public class httpClintHelper {
-    public static void updateRecycler(@NonNull String url,javakit.result.ResultCallback<List<Atom>> resultCallback) {
+    public static void ResultAtoms(@NonNull String url,javakit.result.ResultCallback<List<Atom>> resultCallback) {
          Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -48,6 +51,7 @@ public class httpClintHelper {
             }
         });
     }
+    @SuppressLint("NewApi")
     private static void httpClient(String url, javakit.result.ResultCallback<List<Atom>> resultCallback){
         List<Atom> atoms =new ArrayList<Atom>() ;
         HttpClientResponse.String(url, new HttpClientResponse.ResultCallback<String>() {

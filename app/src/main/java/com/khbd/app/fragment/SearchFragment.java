@@ -1,20 +1,38 @@
 package com.khbd.app.fragment;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.data.RecyclerData;
+import com.factory.RecyclerFactory;
+import com.factory.ScrollingTextFactory;
+import com.factory.ToolbarFactory;
 import com.interfaces.AdditionalInterface;
+import com.khbd.app.MainActivity;
 import com.khbd.app.R;
+import com.khbd.data.httpClintHelper;
+import com.util.APIURL;
 import com.util.Logger;
 import com.factory.SearchFactory;
+import com.util.ToastUtil;
+import com.vendor.design.Atom;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,21 +52,15 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
-    private SearchView fragment_main_search;
-    private View view;
 
+    private View view;
+    private TextView fragment_search_text;
+    private Toolbar fragment_search_toolbar;
+    private RecyclerView fragment_search_recyclerview;
     public SearchFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static SearchFragment newInstance(String param1, String param2) {
         SearchFragment fragment = new SearchFragment();
@@ -73,6 +85,9 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_search, container, false);
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         this.initViews();
         this.initFactory();
         this.initEvent();
@@ -98,40 +113,45 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
 
     @Override
     public void initViews() {
-        fragment_main_search=view.findViewById(R.id.fragment_main_search);
+
+        fragment_search_recyclerview=(RecyclerView)view.findViewById(R.id.fragment_search_recyclerview);
+        fragment_search_text=(TextView) view.findViewById(R.id.fragment_search_text);
+        fragment_search_toolbar = (Toolbar)view.findViewById(R.id.fragment_search_toolbar);
     }
 
 
     @Override
     public void initFactory() {
-        SearchFactory.OnCreate(getActivity(),fragment_main_search, new SearchFactory.ResultCallback() {
+        RecyclerFactory.OnCreate(getActivity(), fragment_search_recyclerview, new RecyclerFactory.ResultCallback() {
             @Override
-            public void onQueryTextSubmit(Context context, SearchView searchView, String search) {
-                Logger.Info("SearchFragment :" + search);
-                mListener.onSearchFragmentInteraction(search);
+            public void OnCreateView(Context context, RecyclerView recyclerView) {
+
+            }
+        });
+
+        ToolbarFactory.OnCreate(getActivity(), fragment_search_toolbar, new ToolbarFactory.ResultCallback() {
+            @Override
+            public void onShare() {
+                ToastUtil.showToast(getActivity(),"SearchActivity in onShare...");
+            }
+        });
+        ScrollingTextFactory.OnCreate(getActivity(), fragment_search_text, new ScrollingTextFactory.ResultCallback() {
+            @Override
+            public void onCreateView(@NonNull Context context, @NonNull TextView textView) {
+                textView.setSelected(true);
             }
         });
     }
 
+    @Override
+    public void initData() {
+        this.updateRecycler(APIURL.ALL(0, 12));
+    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onSearchFragmentInteraction(String str);
     }
-    /*
-     * onAttach(Context) is not called on pre API 23 versions of Android and onAttach(Activity) is deprecated
-     * Use onAttachToContext instead
-     */
 
     @TargetApi(23)
     @Override
@@ -140,10 +160,6 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
         onAttachToContext(context);
 
     }
-    /*
-     * Deprecated on API 23
-     * Use onAttachToContext instead
-     */
     @SuppressWarnings("deprecation")
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -152,9 +168,6 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
         }
     }
 
-    /*
-     * Called when the fragment attaches to the context
-     */
     protected void onAttachToContext(Context context) {
         //do something
         if(context instanceof OnFragmentInteractionListener) {
@@ -166,5 +179,18 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
     }
 
 
+    private void updateRecycler(@NonNull String url){
+        httpClintHelper.ResultAtoms(url, new javakit.result.ResultCallback<List<Atom>>() {
+            @Override
+            public void resove(List<Atom> datas) {
 
+                RecyclerData.load(getActivity(), fragment_search_recyclerview, datas, new RecyclerData.ResultCallback<Atom>() {
+                    @Override
+                    public void onItemClick(Atom atom) {
+                        ToastUtil.showToast(getActivity(), atom.getTitle());
+                    }
+                });
+            }
+        });
+    }
 }
