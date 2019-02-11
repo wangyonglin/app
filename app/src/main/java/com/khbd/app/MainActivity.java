@@ -23,6 +23,7 @@ import com.interfaces.AdditionalInterface;
 
 import com.kernel.Loading;
 import com.khbd.app.fragment.CategoriesFragment;
+import com.khbd.app.fragment.MeFragment;
 import com.khbd.app.fragment.SearchFragment;
 
 import com.khbd.data.httpClintHelper;
@@ -37,7 +38,10 @@ import com.factory.RecyclerFactory;
 import com.factory.ToolbarFactory;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements AdditionalInterface,SearchFragment.OnFragmentInteractionListener ,CategoriesFragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements AdditionalInterface,
+        SearchFragment.OnFragmentInteractionListener ,
+        CategoriesFragment.OnFragmentInteractionListener,
+        MeFragment.OnFragmentInteractionListener{
     private RelativeLayout your_original_layout;
     private BottomNavigationView activity_main_navigation;
 
@@ -98,6 +102,7 @@ public class MainActivity extends FragmentActivity implements AdditionalInterfac
             @Override
             public void onMy() {
                 ToastUtil.showToast(MainActivity.this,"my");
+                FragmentFactory.OnReplace(MainActivity.this,R.id.activity_main_fragment,MeFragment.newInstance("D","DD"));
             }
 
         });
@@ -130,6 +135,8 @@ public class MainActivity extends FragmentActivity implements AdditionalInterfac
     }
 
 
+    @Override
+    public void onMeFragmentInteraction(String str) {
 
-
+    }
 }

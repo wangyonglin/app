@@ -33,26 +33,35 @@
             android:name=".DetailActivity"
             android:configChanges="orientation|keyboard"
             android:label="@string/title_activity_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_search"
             android:configChanges="orientation|keyboard"
             android:theme="@style/MainTheme">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        <!-- 按如下格式添加整个intent-filter块，其中data字段只能有一个，其内容是mtj拼接上您的appkey -->
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- 按如下格式添加整个intent-filter块，其中data字段只能有一个，其内容是mtj拼接上您的appkey -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-            <data android:scheme="mtj13510e274" />
-        </intent-filter>
+                <data android:scheme="mtj13510e274" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SimplePlayActivity"
+            android:label="@string/title_activity_search"
+            android:configChanges="orientation|keyboard"
+            android:theme="@style/SimplePlayActivity">
+
         </activity>
         <activity
             android:name=".SplashActivity"

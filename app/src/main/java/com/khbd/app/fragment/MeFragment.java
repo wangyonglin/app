@@ -1,13 +1,17 @@
 package com.khbd.app.fragment;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.interfaces.AdditionalInterface;
 import com.khbd.app.R;
 
 /**
@@ -18,7 +22,7 @@ import com.khbd.app.R;
  * Use the {@link MeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeFragment extends Fragment {
+public class MeFragment extends Fragment implements AdditionalInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,23 +73,35 @@ public class MeFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(String str ) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onMeFragmentInteraction(str);
         }
     }
 
+    @TargetApi(23)
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        onAttachToContext(context);
+
+    }
+    @SuppressWarnings("deprecation")
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            onAttachToContext(activity);
         }
     }
+    protected void onAttachToContext(Context context) {
+        //do something
+        if(context instanceof MeFragment.OnFragmentInteractionListener) {
+            mListener = (MeFragment.OnFragmentInteractionListener)context; // 2.2 获取到宿主activity并赋值
+        } else{
+            throw new IllegalArgumentException("must implements FragmentInteraction");
+        }
 
+    }
     @Override
     public void onDetach() {
         super.onDetach();
@@ -102,8 +118,10 @@ public class MeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onMeFragmentInteraction(String str);
     }
+
 }

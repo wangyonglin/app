@@ -25,10 +25,12 @@ import com.factory.ToolbarFactory;
 import com.interfaces.AdditionalInterface;
 import com.khbd.app.MainActivity;
 import com.khbd.app.R;
+import com.khbd.app.SimplePlayActivity;
 import com.khbd.data.httpClintHelper;
 import com.util.APIURL;
 import com.util.Logger;
 import com.factory.SearchFactory;
+import com.util.RouteUtil;
 import com.util.ToastUtil;
 import com.vendor.design.Atom;
 
@@ -188,6 +190,7 @@ public class SearchFragment extends Fragment implements AdditionalInterface {
                     @Override
                     public void onItemClick(Atom atom) {
                         ToastUtil.showToast(getActivity(), atom.getTitle());
+                        RouteUtil.JumpWhenCanClick(getActivity(),SimplePlayActivity.class,atom.getVideo());
                     }
                 });
             }

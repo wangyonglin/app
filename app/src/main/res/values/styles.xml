@@ -10,8 +10,6 @@
         <!-- 隐藏状态栏 -->
         <item name="android:windowFullscreen">true</item>
     </style>
-
-
     <!-- Base application theme. -->
     <style name="MainTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
@@ -23,6 +21,12 @@
         <item name="android:textColorSecondary">@color/colorOverlay</item>
         <!--修改searchView样式-->
         <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="SimplePlayActivity" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+
     </style>
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="searchIcon">@mipmap/ic_search</item>
@@ -43,7 +47,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
