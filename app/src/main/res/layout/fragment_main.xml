@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/divider"
+    android:orientation="vertical"
+    tools:context=".fragment.SearchFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:id="@+id/RelativeLayoutMain"
+        android:background="@color/divider">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/fragment_search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+
+    <!--TODO: -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RelativeLayoutMain"
+        android:layout_marginBottom="60dp"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/icons"
+            android:id="@+id/fragment_search_recyclerview"
+
+            />
+    </ScrollView>
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--
+  <android.support.v7.widget.SearchView
+      android:id="@+id/fragment_main_search"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_centerVertical="true"
+      android:layout_alignParentLeft="true"
+      android:background="@color/colorWhite"
+      android:layout_below="@+id/activity_main_toolbar"
+      android:queryHint="@string/title_search_hint"
+      android:textColor="#ABABAB"
+      android:textColorHint="#ABABAB">
+  </android.support.v7.widget.SearchView>
+  -->
+</RelativeLayout>

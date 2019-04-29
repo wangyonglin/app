@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary_background"
+    android:orientation="vertical"
+    tools:context=".fragment.MeFragment">
+    <RelativeLayout
+        android:id="@+id/jumbotron"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:focusable="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true">
+        <TextView
+                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="330天"
+                android:background="@color/primary"
+                android:gravity="center"
+                android:textColor="@color/icons"
+                android:textSize="36dp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/jumbotron"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        >
+
+        <com.khbd.app.view.OneLineView
+            android:id="@+id/one_item"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.khbd.app.view.OneLineView>
+
+        <com.khbd.app.view.OneLineView
+            android:id="@+id/two_item"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.khbd.app.view.OneLineView>
+
+        <com.khbd.app.view.OneLineView
+            android:id="@+id/there_item"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.khbd.app.view.OneLineView>
+        <com.khbd.app.view.OneLineView
+            android:id="@+id/four_item"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.khbd.app.view.OneLineView>
+        <com.khbd.app.view.OneLineView
+            android:id="@+id/del_user"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </com.khbd.app.view.OneLineView>
+
+    </LinearLayout>
+
+</RelativeLayout>
