@@ -1,17 +1,24 @@
 package com.khbd.app;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.driver.Controller;
+import com.driver.Security;
 import com.google.android.gms.ads.AdView;
+import com.kernel.LoginCallback;
+import com.kernel.UserDataUtil;
 import com.util.RouteUtil;
-import com.util.ToastUtil;
 
 import javakit.result.ResultCallback;
 import plugins.google.admob.AdmobBuilder;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends Activity implements Controller {
 
     private AdView MEDIUM_RECTANGLE;
 
@@ -22,9 +29,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
      //   RouteUtil.createService(getApplicationContext());
-
         AdmobBuilder.onCreateAdView(SplashActivity.this, findViewById(R.id.MEDIUM_RECTANGLE), new ResultCallback<AdView>() {
             @Override
             public void resove(AdView view) {
@@ -33,28 +38,21 @@ public class SplashActivity extends Activity {
 
             @Override
             public void reject(RuntimeException e) {
-                ToastUtil.showToast(SplashActivity.this, e.getMessage());
+
             }
         });
-
-
         TextView view =(TextView)findViewById(R.id.DownTimer);
-        javaKitDownTimer = new JavaKitDownTimer(10000, 1000,view, new JavaKitDownTimer.JavaKitDownTimerCallback<String>() {
-
-
+        javaKitDownTimer = new JavaKitDownTimer(8000, 1000,view, new JavaKitDownTimer.JavaKitDownTimerCallback<String>() {
             @Override
             public void finish() {
-                SplashActivity.this.finish();
-                RouteUtil.JumpWhenCanClick(SplashActivity.this, MainActivity.class);
+                //SplashActivity.this.finish();
+                SplashActivity.this.auth(SplashActivity.this);
                 }
-
             @Override
             public void tick(long millisUntilFinished) {
-                view.setText("广告| "+millisUntilFinished/ 1000 + "秒");
-
+                view.setText("公告| "+millisUntilFinished/ 1000 + "秒");
             }
         });
-
         javaKitDownTimer.start();
     }
 
@@ -88,6 +86,20 @@ public class SplashActivity extends Activity {
         javaKitDownTimer.cancel();
        // RouteUtil.destroService(getApplicationContext());
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void auth(Context context) {
+        if(!Security.auth(context)){
+            startActivity(this,LoginActivity.class);
+        }else{
+            startActivity(this,MainActivity.class);
+        }
     }
 }
 

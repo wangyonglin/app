@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -32,25 +31,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-import com.data.UserInfo;
-import com.driver.Bootloader;
 import com.factory.ToolbarFactory;
 import com.kernel.Component;
 
 import com.khbd.data.UserInfoTask;
-import com.util.RouteUtil;
-import com.util.ToastUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javakit.jackson.JacksonUtil;
-import javakit.network.HttpClientResponse;
 import javakit.network.WebClient;
-import javakit.result.ResultCallback;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -151,7 +144,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
           @Override
           public void event(View view) {
               super.event(view);
-              ToastUtil.showToast(RegisterActivity.this,"back");
+              Toast.makeText(RegisterActivity.this,"back",Toast.LENGTH_SHORT).show();
 
           }
       });
@@ -227,13 +220,13 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         // Check for a valid username, if the user entered one.
         if(TextUtils.isEmpty(username)){
             mUsernameView.setError(getString(R.string.error_invalid_username_empty));
-            ToastUtil.showToast(this,getString(R.string.error_invalid_username_empty));
+
             focusView = mUsernameView;
             cancel = true;
             return;
         }else if(!isUsernameValid(username)){
             mUsernameView.setError(getString(R.string.error_invalid_username));
-            ToastUtil.showToast(this,getString(R.string.error_invalid_username));
+
             focusView = mUsernameView;
             cancel = true;
             return;
@@ -265,7 +258,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
         // Check for a valid password, if the user entered one.
         if (!isPasswordConfirmValid(password,password_confirm)) {
-            ToastUtil.showToast(this,"password"+password+"   "+"password_confirm"+password_confirm);
+
             mPasswordConfirmView.setError(getString(R.string.error_invalid_password_confirm));
             focusView = mPasswordConfirmView;
             cancel = true;
@@ -293,7 +286,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 UserInfoTask.addUserInfo(RegisterActivity.this,username, password, phone, new WebClient.ResultCallback<byte[]>() {
                     @Override
                     public void success(byte[] bytes) throws IOException {
-                        ToastUtil.showToast(RegisterActivity.this,bytes.toString());
+
                     }
                 });
             } catch (Exception e) {

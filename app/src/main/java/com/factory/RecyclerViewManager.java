@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.khbd.data.Webcams;
 import com.khbd.movie.RecyclerAdapter;
 import com.vendor.design.Atom;
 import com.vendor.event.OnMovieItemClickListener;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 public class RecyclerViewManager {
-    public static RecyclerViewManager init(Context context, RecyclerView recyclerView, List<Atom> list, ResultCallback<Atom> callback){
+    public static RecyclerViewManager init(Context context, RecyclerView recyclerView, List<Webcams> list, ResultCallback<Webcams> callback){
 
         int spanCount = 3;
         final GridLayoutManager layoutManager = new GridLayoutManager(context,spanCount);//定义瀑布流管理器，第一个参数是列数，第二个是方向。
@@ -23,8 +24,8 @@ public class RecyclerViewManager {
         RecyclerAdapter adapter = new RecyclerAdapter(list,context);
         adapter.setItemClickListener(new OnMovieItemClickListener() {
             @Override
-            public void onItemClick(Atom atom) {
-                callback.onItemClick(atom);
+            public void onItemClick(Webcams webcams) {
+                callback.onItemClick(webcams);
             }
         });
         recyclerView.setAdapter(adapter);//设置适配器

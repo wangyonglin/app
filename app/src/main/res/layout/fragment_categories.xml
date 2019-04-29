@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorWhite"
+    android:background="@color/icons"
     android:orientation="vertical"
     tools:context=".fragment.CategoriesFragment">
     <!-- TODO: Update blank fragment layout -->
@@ -15,15 +15,16 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        app:tabTextColor="@color/colorWhite"
-        android:background="@color/colorMain"
-        app:tabRippleColor="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorWhite"
-        app:tabIndicatorColor="@color/colorWhite"
+        app:tabTextColor="@color/icons"
+        android:background="@color/primary"
+        app:tabRippleColor="@color/icons"
+        app:tabSelectedTextColor="@color/icons"
+        app:tabIndicatorColor="@color/icons"
         app:tabIndicatorHeight="2dp"
         app:tabMaxWidth="0dp"
         app:tabMode="scrollable"
         app:tabGravity="fill"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
         />
 
 
@@ -36,7 +37,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBack"
+        android:background="@color/icons"
         android:id="@+id/fragment_categories_recyclerview"/>
     </ScrollView>
 </RelativeLayout>

@@ -3,19 +3,15 @@
 
     <item
         android:id="@+id/navigation_discover"
-        android:icon="@drawable/ico_menu_discover"
+        android:icon="@drawable/ico_navigation_discover"
         android:title="@string/title_menu_discover" />
     <item
         android:id="@+id/navigation_categories"
-        android:icon="@drawable/ico_menu_categories"
+        android:icon="@drawable/ico_navigation_categories"
         android:title="@string/title_menu_categories" />
     <item
-        android:id="@+id/navigation_pornstars"
-        android:icon="@drawable/ico_menu_pornstars"
-        android:title="@string/title_menu_pornstars" />
-    <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ico_menu_me"
+        android:icon="@drawable/ico_navigation_notifications"
         android:title="@string/title_menu_me" />
 
   

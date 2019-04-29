@@ -1,4 +1,4 @@
-package com.khbd.app.receiver.network;
+package com.driver.receiver.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

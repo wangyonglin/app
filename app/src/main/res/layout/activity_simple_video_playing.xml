@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/colorBlack">
+        android:background="@color/black">
         <RelativeLayout
             android:id="@+id/view_holder"
             android:layout_width="wrap_content"

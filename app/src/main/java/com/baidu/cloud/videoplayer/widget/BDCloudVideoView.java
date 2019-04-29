@@ -41,7 +41,6 @@ import android.widget.TextView;
 import com.baidu.cloud.media.player.BDCloudMediaPlayer;
 import com.baidu.cloud.media.player.BDTimedText;
 import com.baidu.cloud.media.player.IMediaPlayer;
-import com.util.ToastUtil;
 
 import java.io.IOException;
 import java.util.Map;
@@ -1158,10 +1157,10 @@ public class BDCloudVideoView extends FrameLayout implements MediaController.Med
         isTryToPlaying = false;
     }
     public void portrait(){
-        ToastUtil.showToast(getContext(),"portrait()");
+
     }
     public void landscape(){
-        ToastUtil.showToast(getContext(),"landscape()");
+
     }
     public String getCurrentPlayingUrl() {
         if (this.mUri != null) {

@@ -1,10 +1,9 @@
 package com.vendor.event;
 
-import com.vendor.design.Atom;
-import com.vendor.domain.Item;
-import com.wangyonglin.app.domain.TelevisionBuilder;
+import com.khbd.data.Webcams;
+
 
 
 public interface OnMovieItemClickListener {
-    void onItemClick(Atom atom);
+    void onItemClick(Webcams atom);
 }

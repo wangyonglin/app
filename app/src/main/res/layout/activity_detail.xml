@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="com.khbd.app.DetailActivity"
-    android:background="@color/colorWhite">
+    android:background="@color/divider">
 
     <TextView
         android:layout_width="match_parent"

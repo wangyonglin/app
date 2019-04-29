@@ -1,6 +1,5 @@
 package com.khbd.app.fragment;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -9,36 +8,33 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.data.RecyclerData;
+import com.driver.Security;
 import com.factory.FactoryCallback;
-import com.factory.RecyclerFactory;
-import com.factory.ScrollingTextFactory;
-import com.factory.ToolbarFactory;
 import com.factory.ViewFactory;
 import com.interfaces.AdditionalInterface;
-import com.kernel.Component;
-import com.khbd.app.MainActivity;
+import com.kernel.LoginCallback;
+import com.kernel.UserDataUtil;
+import com.kernel.component.MessageBox;
+import com.kernel.network.HttpUser;
 import com.khbd.app.R;
 import com.khbd.app.SimplePlayActivity;
-import com.khbd.data.httpClintHelper;
-import com.util.APIURL;
-import com.util.Logger;
-import com.factory.SearchFactory;
+import com.khbd.data.Webcams;
+import com.khbd.data.WebcamsClient;
 import com.util.RouteUtil;
-import com.util.ToastUtil;
-import com.vendor.design.Atom;
 
 import java.util.List;
+
+import javakit.result.ResultCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,13 +85,13 @@ public class MainFragment extends Fragment implements AdditionalInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_search, container, false);
+        view=inflater.inflate(R.layout.fragment_main, container, false);
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         ViewFactory.OnCreateView(getActivity(),view,R.id.fragment_search_toolbar, new FactoryCallback<Toolbar>() {
             @Override
             public Toolbar onView(Context context, Toolbar view) {
-                view.setTitle(getString(R.string.title_activity_main_search));
+                view.setTitle(getString(R.string.app_name));
                 view.setTitleTextColor(Color.WHITE);
                 view.setBackgroundColor(getResources().getColor(R.color.primary));
                 return view;
@@ -134,18 +130,13 @@ public class MainFragment extends Fragment implements AdditionalInterface {
 
     @Override
     public void initFactory() {
-        RecyclerFactory.OnCreate(getActivity(), fragment_search_recyclerview, new RecyclerFactory.ResultCallback() {
-            @Override
-            public void OnCreateView(Context context, RecyclerView recyclerView) {
 
-            }
-        });
 
     }
 
     @Override
     public void initData() {
-        this.updateRecycler(APIURL.ALL(0, 12));
+        this.updateRecycler(getActivity());
     }
 
     public interface OnFragmentInteractionListener {
@@ -179,19 +170,50 @@ public class MainFragment extends Fragment implements AdditionalInterface {
     }
 
 
-    private void updateRecycler(@NonNull String url){
-        httpClintHelper.ResultAtoms(url, new javakit.result.ResultCallback<List<Atom>>() {
+    private void updateRecycler(@NonNull Context context){
+        WebcamsClient.all(context, new WebcamsClient.WebcamsClientCallback() {
             @Override
-            public void resove(List<Atom> datas) {
-
-                RecyclerData.load(getActivity(), fragment_search_recyclerview, datas, new RecyclerData.ResultCallback<Atom>() {
+            public void WebcamsAll(Context context, List<Webcams> list) {
+                RecyclerData.load(getActivity(), fragment_search_recyclerview, list, new RecyclerData.ResultCallback<Webcams>() {
                     @Override
-                    public void onItemClick(Atom atom) {
-                        ToastUtil.showToast(getActivity(), atom.getTitle());
-                        RouteUtil.JumpWhenCanClick(getActivity(),SimplePlayActivity.class,atom.getVideo());
+                    public void onItemClick(Webcams webcams) {
+                        JumpActivity(UserDataUtil.getUser(getContext()),webcams);
                     }
                 });
             }
+
+            @Override
+            public void onErrorResume(Exception e) {
+                e.printStackTrace();
+            }
         });
+    }
+
+    public void JumpActivity(String user,Webcams webcams){
+        HttpUser httpUser= new HttpUser();
+        httpUser.Time(user, new ResultCallback<Integer>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void resove(Integer cls) {
+                if(cls>=1){
+                    RouteUtil.JumpWhenCanClick(getActivity(),SimplePlayActivity.class,webcams.getVideourl());
+                }else{
+                    httpUser.Jumbotron(new ResultCallback<String>() {
+                        @Override
+                        public void resove(String cls) {
+                            MessageBox.make(getContext(),"请充值续费",cls,MessageBox.INFO).show();
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void reject(RuntimeException e) {
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 }

@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="url_webcams_categories">http://apis.eeob.com/webcams/categories</string>
+    <string name="url_webcams_all">http://apis.eeob.com/webcams/all</string>
+    <string name="url_app_version">http://apis.eeob.com/app/version</string>
+    <string name="url_user_add">http://apis.eeob.com/user/add</string>
+    <string name="url_user_auth">http://apis.eeob.com/user/auth</string>
+    <string name="url_user_login">http://apis.eeob.com/user/login</string>
+</resources>

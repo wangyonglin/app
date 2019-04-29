@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorWechat">#2F9833</color>
-    <color name="colorWechat1">#439057</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorPurple">#7F1F76</color>
-    <color name="colorMain">#FF4081</color>
-    <color name="colorBlack">#000</color>
-    <color name="colorWhite">#fff</color>
-    <color name="colorBack">#f0f0f0</color>
-    <color name="colorOverlay">#66000000</color>
-    <color name="black_overlay">#66000000</color>
+    <color name="primary">#E91E63</color>
+    <color name="primary_dark">#C2185B</color>
+    <color name="primary_light">#F8BBD0</color>
+    <color name="primary_background">#FAFAFA</color>
+    <color name="accent">#FF4081</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="black">#000000</color>
 </resources>

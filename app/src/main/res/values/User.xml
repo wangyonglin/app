@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="User">User</string>
+    <string name="VIP">VIP</string>
+    <string name="Contact">Contact Us</string>
+    <string name="Exit">Exit</string>
+    <string name="LogOut">Log Out</string>
+    <string name="TopUp">Top Up</string>
+    <string name="Version">Version</string>
+    <string name="Check">Check</string>
+    <string name="About">About Us</string>
+    <string name="Company">Company</string>
+    <string name="Setting">Setting</string>
+
+
+</resources>

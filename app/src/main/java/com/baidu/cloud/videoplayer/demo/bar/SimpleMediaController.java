@@ -9,16 +9,12 @@ import com.baidu.cloud.videoplayer.widget.BDCloudVideoView.PlayerState;
 import com.khbd.app.R;
 import com.khbd.app.SimplePlayActivity;
 import com.util.ScreenUtil;
-import com.util.ToastUtil;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-
-import javakit.result.ResultCallback;
 
 /**
  * 简易播放条控件 该类依赖的资源文件有： drawable-xhdpi/seekbar_holo_light.xml

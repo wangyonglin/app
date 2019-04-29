@@ -3,10 +3,10 @@ package com.kernel.network;
 import android.content.Context;
 
 
-
+import com.kernel.LoginCallback;
 import com.kernel.UserDataUtil;
 
-import com.khbd.app.LoginActivity;
+
 import com.khbd.app.R;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import javakit.util.JavaKitJsonUtils;
 
 public class Welcome{
 
-    public Welcome(Context context, String username, String password, LoginCallback loginCalllback){
+    public static void Login(Context context, String username, String password, LoginCallback<String> loginCalllback){
         StringBuffer buffer= new StringBuffer();
         buffer.append(context.getString(R.string.url_user_login));
         buffer.append("?user=").append(username).append("&pass=").append(password);
@@ -34,7 +34,7 @@ public class Welcome{
                         String  token  = JavaKitJsonUtils.readTree(res).get("token").textValue();
                         UserDataUtil.setUser(context,user);
                         UserDataUtil.setToken(context,token);
-                        loginCalllback.login_success(context);
+                        loginCalllback.login_success(context,user);
                     } catch (IOException e) {
                         loginCalllback.login_failure(new RuntimeException("info login fail"));
                     }

@@ -9,9 +9,9 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/divider"
         android:visibility="visible"
-        app:indicatorColor="@color/colorAccent"
+        app:indicatorColor="@color/accent"
         app:indicatorName="BallPulseIndicator"
         />
 

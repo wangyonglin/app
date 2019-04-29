@@ -5,24 +5,24 @@
     android:layout_height="wrap_content"
     android:background="@color/primary_background"
     android:orientation="vertical"
-    tools:context=".fragment.MeFragment">
+    tools:context=".fragment.UserFragment">
     <RelativeLayout
         android:id="@+id/jumbotron"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:focusable="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true">
         <TextView
-                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="330天"
+                android:id="@+id/jumbotron_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/primary"
-                android:gravity="center"
-                android:textColor="@color/icons"
-                android:textSize="36dp"/>
+                android:padding="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/icons"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

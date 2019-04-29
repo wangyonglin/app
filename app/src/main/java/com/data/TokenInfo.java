@@ -1,18 +1,29 @@
 package com.data;
 
-public class TokenInfo {
-    private String username;
-    private String token;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_EMPTY)
+public class TokenInfo {
+    @JsonProperty("user")
+    private String user;
+    @JsonProperty("token")
+    private String token;
+//@JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     public TokenInfo() {
     }
 
-    public String getUsername() {
-        return username;
+    public TokenInfo(String user, String token) {
+        this.user = user;
+        this.token = token;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getToken() {

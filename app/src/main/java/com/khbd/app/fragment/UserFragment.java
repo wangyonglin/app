@@ -3,40 +3,31 @@ package com.khbd.app.fragment;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.Gravity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.driver.Manufacturer;
+import com.driver.SystemInfo;
 import com.interfaces.AdditionalInterface;
 import com.kernel.UserDataUtil;
-import com.kernel.component.vip.BulletinDialog;
-
+import com.kernel.component.MessageBox;
+import com.kernel.network.HttpMain;
+import com.kernel.network.HttpUser;
 import com.khbd.app.R;
-import com.khbd.app.view.MessageBox;
 import com.khbd.app.view.OneLineView;
+import javakit.Callback;
+import javakit.result.ResultCallback;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MeFragment extends Fragment implements AdditionalInterface {
+public class UserFragment extends Fragment implements AdditionalInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,24 +36,20 @@ public class MeFragment extends Fragment implements AdditionalInterface {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private TextView jumbotron_text;
     private OnFragmentInteractionListener mListener;
     OneLineView oneItem, twoItem, thereItem,four_item,del_user;
-    public MeFragment() {
-        // Required empty public constructor
+    private String user_id="";
+    private String vip_time="Members have expired";
+    private String version="1.0";
+    private HttpUser mHttpUser=new HttpUser();
+    private HttpMain mHttpMain = new HttpMain();
+    public UserFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MeFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static MeFragment newInstance(String param1, String param2) {
-        MeFragment fragment = new MeFragment();
+    public static UserFragment newInstance(String param1, String param2) {
+        UserFragment fragment = new UserFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,14 +65,50 @@ public class MeFragment extends Fragment implements AdditionalInterface {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        //MessageBox.run(getContext(),"充值会员请加微信: EX7132",5000);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_me, container, false);
+        View view=inflater.inflate(R.layout.fragment_user, container, false);
+        jumbotron_text=(TextView) view.findViewById(R.id.jumbotron_text);
+        user_id=UserDataUtil.getUser(getContext());
+        //加载网络Jumbotron
+        mHttpUser.Jumbotron(new ResultCallback<String>() {
+            @Override
+            public void resove(String cls) {
+                jumbotron_text.setText(Html.fromHtml(cls));
+            }
+        });
+        //加载会员到期时间
+        mHttpUser.Time(user_id, new ResultCallback<Integer>() {
+            @Override
+            public void resove(Integer cls) {
+               if(cls>=1){
+                   vip_time=String.valueOf(cls) +" D";
+               }
+            }
+
+            @Override
+            public void reject(RuntimeException e) {
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        //
+        mHttpMain.Version(new ResultCallback<String>() {
+            @Override
+            public void resove(String cls) {
+                version=cls;
+            }
+        });
+        SystemInfo.Version(getContext(), new Callback<PackageInfo>() {
+            @Override
+            public void resove(PackageInfo cls) {
+                version=cls.versionName;
+
+            }
+        });
         //在xml布局中使用MyOneLineView
         del_user=(OneLineView)view.findViewById(R.id.del_user);
         oneItem = (OneLineView) view.findViewById(R.id.one_item);
@@ -96,21 +119,21 @@ public class MeFragment extends Fragment implements AdditionalInterface {
         del_user.setOnRootClickListener(new OneLineView.OnRootClickListener() {
             @Override
             public void onRootClick(View view) {
-                UserDataUtil.setUser(getActivity(),"");
                 UserDataUtil.setPass(getActivity(),"");
                 UserDataUtil.setToken(getActivity(),"");
                 Toast.makeText(getActivity(),"clear user info ok",Toast.LENGTH_SHORT).show();
             }
         },1);
-        oneItem.initMine(R.mipmap.ic_vip, getString(R.string.VIP), "top up", false);
+        oneItem.initMine(R.mipmap.ic_vip, getString(R.string.VIP), vip_time, false);
         oneItem.setOnRootClickListener(new OneLineView.OnRootClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onRootClick(View view) {
-                BulletinDialog.make(getContext(),"充值请增加微信:ULV1688").show();
+                MessageBox.make(getContext(),"User Info","user id："+user_id,MessageBox.INFO).show();
             }
         },1);
         four_item.initMine(R.mipmap.ic_setting, getString(R.string.Setting), "", false);
-        twoItem.initMine(R.mipmap.ic_version, getString(R.string.Version), "", false);
+        twoItem.initMine(R.mipmap.ic_version, getString(R.string.Version), version, false);
         twoItem.setOnRootClickListener(new OneLineView.OnRootClickListener() {
             @Override
             public void onRootClick(View view) {
@@ -161,8 +184,8 @@ public class MeFragment extends Fragment implements AdditionalInterface {
     }
     protected void onAttachToContext(Context context) {
         //do something
-        if(context instanceof MeFragment.OnFragmentInteractionListener) {
-            mListener = (MeFragment.OnFragmentInteractionListener)context; // 2.2 获取到宿主activity并赋值
+        if(context instanceof UserFragment.OnFragmentInteractionListener) {
+            mListener = (UserFragment.OnFragmentInteractionListener)context; // 2.2 获取到宿主activity并赋值
         } else{
             throw new IllegalArgumentException("must implements FragmentInteraction");
         }
@@ -174,20 +197,11 @@ public class MeFragment extends Fragment implements AdditionalInterface {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onMeFragmentInteraction(String str);
     }
+
+
 
 }

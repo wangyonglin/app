@@ -21,9 +21,6 @@ public class NavigationFactory  {
                         case R.id.navigation_categories:
                             resultCallback.onCategories();
                             return true;
-                        case R.id.navigation_pornstars:
-                            resultCallback.onPornstars();
-                            return true;
                         case R.id.navigation_notifications:
                             resultCallback.onMy();
                             return true;

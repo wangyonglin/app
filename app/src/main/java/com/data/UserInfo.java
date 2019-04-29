@@ -1,37 +1,29 @@
-package com.merlin.webflux.Entity;
+package com.data;
 
 
 import javakit.date.DateUtils;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Indexed;
 
 import java.util.Date;
-@Data
-@AllArgsConstructor
-@Document
+
 public class UserInfo {
-    @Id
     private String id;
-  //  @Indexed(unique = true) // 注解属性username为索引，并且不能重复
     private String Email;
     private String Username;
     private String Password;
     private String Phone;
     private String Wechat;
+
     private String ActivationCode;
-    @NonNull
     private Date Register = DateUtils.CurrentDate();
-    @NonNull
     private Date Countdown =DateUtils.CurrentDate();
     private Boolean Status;
 
     public UserInfo() {
+    }
+
+    public UserInfo(String user, String password) {
+        Username = user;
+        Password = password;
     }
 
     public String getId() {
@@ -114,4 +106,6 @@ public class UserInfo {
     public void setStatus(Boolean status) {
         Status = status;
     }
+
+
 }

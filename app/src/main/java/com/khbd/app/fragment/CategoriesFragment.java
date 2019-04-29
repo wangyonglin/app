@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,10 @@ import com.factory.RecyclerFactory;
 import com.factory.TabLayoutFactory;
 import com.interfaces.AdditionalInterface;
 import com.khbd.app.R;
-import com.khbd.data.httpClintHelper;
-import com.util.APIURL;
-import com.util.ToastUtil;
-import com.vendor.design.Atom;
+import com.khbd.app.SimplePlayActivity;
+import com.khbd.data.Webcams;
+import com.khbd.data.WebcamsClient;
+import com.util.RouteUtil;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
     private TabLayout fragment_main_categories;
     private OnFragmentInteractionListener mListener;
     private View view;
-    private RecyclerView fragment_categories_recyclerview;
+    private RecyclerView mRecyclerViewView;
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -125,12 +124,12 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
     @Override
     public void initViews() {
         fragment_main_categories=view.findViewById(R.id.fragment_main_categories);
-        fragment_categories_recyclerview=view.findViewById(R.id.fragment_categories_recyclerview);
+        mRecyclerViewView=view.findViewById(R.id.fragment_categories_recyclerview);
     }
 
     @Override
     public void initFactory() {
-        RecyclerFactory.OnCreate(getActivity(), fragment_categories_recyclerview, new RecyclerFactory.ResultCallback() {
+        RecyclerFactory.OnCreate(getActivity(), mRecyclerViewView, new RecyclerFactory.ResultCallback() {
             @Override
             public void OnCreateView(Context context, RecyclerView recyclerView) {
 
@@ -139,32 +138,24 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
         TabLayoutFactory.OnCreate(getActivity(), fragment_main_categories, new TabLayoutFactory.ResultCallback() {
             @Override
             public void OnCreateView(Context context, TabLayout view) {
-                view.addTab(view.newTab().setText("Japanese"));
-                view.addTab(view.newTab().setText("喜剧"));
-                view.addTab(view.newTab().setText("动作"));
-                view.addTab(view.newTab().setText("爱情"));
-                view.addTab(view.newTab().setText("科幻"));
-                view.addTab(view.newTab().setText("动画"));
-                view.addTab(view.newTab().setText("悬疑"));
-                view.addTab(view.newTab().setText("惊悚"));
-                view.addTab(view.newTab().setText("犯罪"));
-                view.addTab(view.newTab().setText("音乐"));
-                view.addTab(view.newTab().setText("歌舞"));
-                view.addTab(view.newTab().setText("传记"));
-                view.addTab(view.newTab().setText("历史"));
-                view.addTab(view.newTab().setText("战争"));
-                view.addTab(view.newTab().setText("西部"));
-                view.addTab(view.newTab().setText("奇幻"));
-                view.addTab(view.newTab().setText("冒险"));
-                view.addTab(view.newTab().setText("灾难"));
-                view.addTab(view.newTab().setText("武侠"));
-                view.addTab(view.newTab().setText("情色"));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_pornstars)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_teenage)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_blowjobs)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_handjobs)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_bigtits)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_amateur)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_live)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_bigtits)));
+
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_boobies)));
+                view.addTab(view.newTab().setText(context.getString(R.string.categories_ass)));
+
+
             }
 
             @Override
-            public void onTabSelected(String  text) {
-                ToastUtil.showToast(getActivity(),text);
-                updateRecycler(APIURL.CATEGORIES(text,0,12));
+            public void onTabSelected(Context context,String  text) {
+                recyclerViewCategories(context,mRecyclerViewView,text);
             }
         });
     }
@@ -212,20 +203,25 @@ public class CategoriesFragment extends Fragment implements AdditionalInterface 
 
     @Override
     public void initData() {
-        this.updateRecycler(APIURL.CATEGORIES("喜剧",0,12));
+        recyclerViewCategories(getContext(),mRecyclerViewView,getContext().getString(R.string.categories_pornstars));
     }
 
-    private void updateRecycler(@NonNull String url){
-        httpClintHelper.ResultAtoms(url, new javakit.result.ResultCallback<List<Atom>>() {
-            @Override
-            public void resove(List<Atom> datas) {
+    private void recyclerViewCategories(@NonNull Context context,RecyclerView recyclerView,String key){
 
-                RecyclerData.load(getActivity(), fragment_categories_recyclerview, datas, new RecyclerData.ResultCallback<Atom>() {
+        WebcamsClient.categories(context,key, new WebcamsClient.WebcamsClientCallback() {
+            @Override
+            public void WebcamsAll(Context context, List<Webcams> list) {
+                RecyclerData.load(context, recyclerView, list, new RecyclerData.ResultCallback<Webcams>() {
                     @Override
-                    public void onItemClick(Atom atom) {
-                        ToastUtil.showToast(getActivity(), atom.getTitle());
+                    public void onItemClick(Webcams webcams) {
+                        RouteUtil.JumpWhenCanClick(getActivity(),SimplePlayActivity.class,webcams.getVideourl());
                     }
                 });
+            }
+
+            @Override
+            public void onErrorResume(Exception e) {
+                e.printStackTrace();
             }
         });
     }

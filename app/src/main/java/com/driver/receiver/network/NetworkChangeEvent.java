@@ -1,4 +1,4 @@
-package com.khbd.app.receiver.network;
+package com.driver.receiver.network;
 
 public class NetworkChangeEvent {
     public boolean isConnected; //是否存在网络

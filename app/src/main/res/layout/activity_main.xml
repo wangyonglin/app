@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MainActivity"
-    android:background="@color/colorBack">
+    android:background="@color/icons">
 
     <FrameLayout
         android:id="@+id/activity_main_fragment"
@@ -34,6 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorWhite"
+        android:background="@color/icons"
         app:menu="@menu/navigation" />
 </RelativeLayout>

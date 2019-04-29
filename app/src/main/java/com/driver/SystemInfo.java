@@ -4,18 +4,17 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import javakit.Callback;
+
 public class SystemInfo{
-    public static void PackageCallback(Context context,Callback<PackageInfo> callback){
+    public static void Version(Context context,Callback<PackageInfo> callback){
         PackageManager manager = context.getPackageManager();
         try {
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-            callback.call(info);
+            callback.resove(info);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            callback.reject(e);
         }
     }
-    public interface Callback<T extends PackageInfo>{
-        public void call(T x);
-        default void err(Exception e){};
-    }
+
 }

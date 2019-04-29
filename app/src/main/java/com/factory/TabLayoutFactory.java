@@ -11,7 +11,7 @@ public class TabLayoutFactory {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                resultCallback.onTabSelected(tab.getText().toString());
+                resultCallback.onTabSelected(context,tab.getText().toString());
             }
 
             @Override
@@ -27,6 +27,6 @@ public class TabLayoutFactory {
     }
     public interface ResultCallback{
         default void OnCreateView(Context context,TabLayout tabLayout){};
-        default void onTabSelected(String tab){};
+        default void onTabSelected(Context context,String tab){};
     }
 }

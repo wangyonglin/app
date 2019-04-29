@@ -1,14 +1,23 @@
 package com.driver;
 
 import android.app.Application;
+import android.support.design.widget.BottomSheetDialog;
 import android.util.Log;
 
 import com.baidu.mobstat.StatService;
+
+import com.data.DetailsInfo;
+import com.data.FILE_CACHE_DEFINE;
+import com.data.TokenInfo;
 import com.flurry.android.FlurryAgent;
+import com.khbd.app.R;
 
 
-public class Bootloader extends Application {
+public class Bootloader extends Application  {
     private static String FLURRY_API_KEY = "42WF7PJQ4JZBRNN4YW82";
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();

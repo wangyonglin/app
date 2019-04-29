@@ -1,10 +1,7 @@
 package com.khbd.app;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 
@@ -19,11 +16,12 @@ import com.baidu.cloud.videoplayer.demo.info.SharedPrefsStore;
 import com.baidu.cloud.videoplayer.demo.info.VideoInfo;
 import com.baidu.cloud.videoplayer.widget.BDCloudVideoView;
 import com.baidu.cloud.videoplayer.widget.BDCloudVideoView.PlayerState;
+
 import com.util.ParamUtil;
-import com.util.ToastUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 public class SimplePlayActivity extends AppCompatActivity implements IMediaPlayer.OnPreparedListener,
 
         IMediaPlayer.OnCompletionListener, IMediaPlayer.OnErrorListener,
@@ -42,6 +40,7 @@ public class SimplePlayActivity extends AppCompatActivity implements IMediaPlaye
     private RelativeLayout mViewHolder = null;
     private Timer barTimer;
     private String videoUrl;
+
     /**
      * 记录播放位置
      */
@@ -58,11 +57,12 @@ public class SimplePlayActivity extends AppCompatActivity implements IMediaPlaye
         ParamUtil.pop(SimplePlayActivity.this, new ParamUtil.ParamCallback() {
             @Override
             public void get(String uri) {
-                ToastUtil.showToast(SimplePlayActivity.this,uri);
+
                 videoUrl=uri;
             }
         });
         initUI();
+
 
     }
 

@@ -1,4 +1,6 @@
 package com.khbd.app.view;
 
-public class UpdateDialogCallback {
+public interface UpdateDialogCallback {
+    default void update(){};
+    default void cancel(){};
 }
